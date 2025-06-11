@@ -9,75 +9,103 @@ function getComputerChoice() {
     } else {
         choice = "Rock";
     }
-    console.log("Computer chooses " + choice)
     return choice;
 }
 
-function getHumanChoice(){
-    let choice = prompt("Rock, Paper, or Scissor?: ")
-    console.log("You choose " + choice)
-    return choice
-}
+function playRound(humanChoice) {
+    humanChoice = humanChoice.toUpperCase();
+    let computerChoice = getComputerChoice();
 
-
-function playGame() {
-
-    function playRound(humanChoice, computerChoice) {
-        humanChoice = humanChoice.toUpperCase();
-
-        if (humanChoice === "ROCK") {
-            if (computerChoice === "Rock") {
-                console.log("Its a draw!")
-            } else if (computerChoice === "Paper") {
-                console.log("You lose! Paper beats Rock")
-                computerScore += 1;
-            } else {
-                console.log("You win! Rock beats Scissor")
-                humanScore += 1;
-            }
-        } else if (humanChoice === "PAPER") {
-            if (computerChoice === "Rock") {
-                console.log("You win! Paper beats Rock")
-                humanScore += 1;
-            } else if (computerChoice === "Paper") {
-                console.log("Its a draw!")
-            } else {
-                console.log("You lose! Scissor beats Paper")
-                computerScore += 1;
-            }
-        } else {
-            if (computerChoice === "Rock") {
-                console.log("You lose! Rock beats Scissor")
-                computerScore += 1;
-            } else if (computerChoice === "Paper") {
-                console.log("You win! Scissor beats Paper")
-                humanScore += 1;
-            } else {
-                console.log("Its a draw!")
-            }
-        }
-
-    }
-
-    let computerScore = 0;
-    let humanScore = 0;
-
-
-    for (let i = 0; i < 5; i++){
-        let humanSelection = getHumanChoice();
-        let computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-        console.log("Human Score: " + humanScore + " | " + computerScore + " :Computer Score")
-    }
-
-    if (humanScore > computerScore) {
-        console.log("You win!")
+    if (computerChoice === "Rock") {
+        iconComputer.textContent = "✊";
+    } else if (computerChoice === "Paper") {
+        iconComputer.textContent = "🖐";
     } else {
-        console.log("You lose!")
+        iconComputer.textContent = "✌️";
+    }
+
+    if (humanChoice === "ROCK") {
+        if (computerChoice === "Rock") {
+            announcer.textContent ="Its a draw!";
+        } else if (computerChoice === "Paper") {
+            announcer.textContent = "You lose! Paper beats Rock";
+            computerScore += 1;
+        } else {
+            announcer.textContent = "You win! Rock beats Scissor";
+            humanScore += 1;
+        }
+    } else if (humanChoice === "PAPER") {
+        if (computerChoice === "Rock") {
+            announcer.textContent = "You win! Paper beats Rock";
+            humanScore += 1;
+        } else if (computerChoice === "Paper") {
+            announcer.textContent = "Its a draw!";
+        } else {
+            announcer.textContent = "You lose! Scissor beats Paper";
+            computerScore += 1;
+        }
+    } else {
+        if (computerChoice === "Rock") {
+            announcer.textContent = "You lose! Rock beats Scissor";
+            computerScore += 1;
+        } else if (computerChoice === "Paper") {
+            announcer.textContent = "You win! Scissor beats Paper";
+            humanScore += 1;
+        } else {
+            
+            announcer.textContent = "Its a draw!";
+        }
+    }
+
+    computerScoreQuery.textContent = computerScore;
+    humanScoreQuery.textContent = humanScore;
+    maxScoreChecker();
+
+}
+
+function maxScoreChecker() {
+    if (humanScore == maxScore) {
+        announcer.textContent = "Congratulations! You Win!"
+        disableAllButtons();
+    } else if (computerScore == maxScore) {
+        announcer.textContent = "Better Luck Next Time!"
+        disableAllButtons();
     }
 }
 
+function disableAllButtons() {
+    buttons.forEach((button) => {
+        button.disabled = true;
+        button.style.opacity = 0.5;
+    });
+}
 
-playGame()
+let computerScore = 0;
+let humanScore = 0;
 
+const computerScoreQuery = document.querySelector(".computer-score");
+const humanScoreQuery = document.querySelector(".human-score");
+const iconHuman = document.querySelector(".human-sign");
+const iconComputer = document.querySelector(".computer-sign");
+const announcer = document.querySelector(".text-announcer");
+const maxScore = 5;
+const buttons = document.querySelectorAll("button");
+
+document.querySelector(".rock-btn").addEventListener("click", () => {
+    iconHuman.textContent = "✊";
+    let rock = 'Rock';
+    playRound(rock);
+});
+
+document.querySelector("button.paper-btn").addEventListener("click", () => {
+    iconHuman.textContent = "🖐";
+    let paper = 'Paper';
+    playRound(paper);
+});
+
+document.querySelector("button.scissor-btn").addEventListener("click", () => {
+    iconHuman.textContent = "✌️";
+    let scissor = 'Scissor';
+    playRound(scissor);
+});
 

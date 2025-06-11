@@ -1,0 +1,82 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: 'Roboto', 'Courier New', Courier, monospace;
+}
+
+.score-container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.human-score, .computer-score {
+    padding: 16px;
+    display: flex;
+    flex: 1;
+    font-size: 76px;
+    font-weight: 900;
+}
+
+.human-score {
+    background-color: blue;
+    justify-content: end;
+}
+
+.computer-score {
+    background-color: red;
+}
+
+.text-announcer {
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    font-size: 84px;
+    font-weight: 900;
+    justify-content: center;
+}
+
+.sign-container {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.human-sign, .computer-sign {
+    display: flex;
+    font-size: 300px;
+}
+
+.sign-button {
+    margin-top: 100px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.rock-btn, .paper-btn, .scissor-btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; 
+    border: 3px solid black; 
+    background-color: white; 
+    color: #007BFF; 
+    font-size: 50px; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+button:hover {
+    background-color: #007BFF; 
+    color: white; 
+    border-color: #0056b3; 
+}
